@@ -8,14 +8,46 @@ from sklearn.metrics import classification_report
 
 dataSet = [
     [10 , "YES" , 160 , 2 , "NO" ,"DON'T BUY"],
-    [10 , "YES" , 100 , 2 , "YES" ,"BUY"],
-    [8 , "NO" , 200 , 5 , "NO" ,"DON'T BUY"],
-    [5 , "YES" , 0 , 0 , "YES" ,"BUY"],
-    [3 , "NO" , 20 , 0.1 , "YES" , "BUY"]
+    [9 , "YES" , 160 , 2 , "NO" ,"DON'T BUY"],
+    [8 , "YES" , 160 , 2 , "NO" ,"DON'T BUY"],
+    [7 , "NO" , 160 , 2 , "NO" ,"DON'T BUY"],
+    [10 , "YES" ,170 , 2 , "NO" ,"DON'T BUY"],
+    [9 , "NO" , 180 , 2.2 , "NO" ,"DON'T BUY"],
+    [8 , "YES" , 190 , 1.2 , "NO" ,"DON'T BUY"],
+    [7 , "YES" , 200 , 1.3 , "NO" ,"DON'T BUY"],
+    [10 , "NO" ,210 , 2.1 , "NO" ,"DON'T BUY"],
+    [9 , "YES" , 170 , 1.5 , "YES" ,"DON'T BUY"],
+    [8 , "YES" , 170 , 1.6 , "NO" ,"DON'T BUY"],
+    [7 , "YES" , 170 , 1.4 , "NO" ,"DON'T BUY"],
+    [10 , "YES" , 160 , 2.3 , "YES" ,"DON'T BUY"],
+    [10 , "YES" , 160 , 2.4, "NO" ,"DON'T BUY"],
+    [10 , "YES" , 160 , 2.5 , "YES" ,"DON'T BUY"],
+    [10 , "YES" , 160 , 2.7 , "YES" ,"DON'T BUY"],
+    [8 , "Yes" , 200 , 5 , "NO" ,"DON'T BUY"],
+    [3 , "NO" , 20 , 0.1 , "YES" , "BUY"],
+    [4 , "NO" , 30 , 0.2 , "YES" , "BUY"],
+    [5 , "NO" , 40 , 0.3 , "YES" , "BUY"],
+    [3 , "NO" , 50 , 0.4 , "YES" , "BUY"],
+    [4 , "YES" , 60 , 0.5 , "YES" , "BUY"],
+    [5 , "NO" , 70 , 0.6 , "NO" , "BUY"],
+    [6 , "NO" , 80 , 0.7 , "YES" , "BUY"],
+    [3 , "YES" , 90 , 0.8 , "YES" , "BUY"],
+    [4 , "NO" , 100 , 0.9 , "NO" , "BUY"],
+    [5 , "NO" , 110 , 1 , "YES" , "BUY"],
+    [3 , "NO" , 120 , 0.1 , "YES" , "BUY"],
+    [4 , "YES" , 130 , 0.2 , "NO" , "BUY"],
+    [5 , "NO" , 140 , 0.3 , "YES" , "BUY"],
+    [6 , "NO" , 80 , 0.4 , "NO" , "BUY"],
+    [6 , "NO" , 20 , 0.5 , "YES" , "BUY"]
 ]
 
 header = ["taille liste" , "presence educorant" , "valeur calorique" , "taux sel",
           "tous les graisses de meilleur qualité" , "label"]
+
+
+
+
+
 #clf = tree.DecisionTreeClassifier()
 #clf = clf.fit(features,labels)
 #p = clf.predict([[10, 1, 6, 20, 2, 0]])
@@ -93,6 +125,8 @@ def info_gain(left, right, current_uncertainty):
     p = float(len(left)) / (len(left) + len(right))
     # print("p =" +str(p))
     return current_uncertainty - p * gini(left) - (1 - p) * gini(right)
+
+
 #current = gini(dataSet)
 #true , false =partition(dataSet,Question(1,"YES"))
 #print(info_gain(true,false,current))
@@ -114,6 +148,8 @@ def find_best_split(rows):
                 best_gain, best_question = gain, question
     return best_gain, best_question
 best_gain, best_question = find_best_split(dataSet)
+
+
 #print(best_gain)
 #print(best_question)
 
@@ -153,4 +189,12 @@ def print_leaf(counts):
     for lbl in counts.keys():
         probs[lbl] = str(int(counts[lbl] / total * 100)) + "%"
     return probs
-print(print_leaf(classify( [100 , "NO" , 20 , 200 , "YES" ,"DON'T BUY"], my_tree)))
+
+#header = ["taille liste" , "presence educorant" , "valeur calorique" , "taux sel",
+  #  "tous les graisses de meilleur qualité" , "label"]
+
+
+print(print_leaf(classify( [3 , "YES" , 90 , 0.8 , "YES"] , my_tree)))
+print(print_leaf(classify([ 8 , "YES" , 160 , 2 , "NO"  ], my_tree)))
+print(print_leaf(classify( [2 , "NO" , 20 , 0.1 , "YES" ], my_tree)))
+print(print_leaf(classify( [3 , "NO" , 170 , 1.5 , "NO" ], my_tree)))
